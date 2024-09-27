@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
-    public static GameManager Instance = null;                         
+    public static GameManager Instance = null;
 
     void Awake()
     {
@@ -22,9 +23,24 @@ public class GameManager : MonoBehaviour {
         // Dont destroy on reloading the scene
         DontDestroyOnLoad(gameObject);
 
- 
+
     }
 
-    public PlayerController Player;
-    
+    private PlayerController playerController;
+
+    public PlayerController Player
+    {
+        get
+        {
+            if (playerController == null)
+            {
+                playerController = FindObjectOfType<PlayerController>();
+
+            }
+
+            return playerController;
+
+        }
+    }
+
 }

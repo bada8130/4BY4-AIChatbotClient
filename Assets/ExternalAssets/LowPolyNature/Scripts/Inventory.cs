@@ -27,18 +27,23 @@ public class Inventory : MonoBehaviour
 
     public void RefreshItemList()
     {
-        for (int i = 0; i < UserManager.Instance.items.Count; i++)
+        if (UserManager.Instance)
         {
-            var item = UserManager.Instance.items[i];
-            var item_id = item.item_id;
-            var item_quantity = item.quantity;
-            var itemObj = itemTable.itemList.Find(obj => obj.id == item_id);
-
-            for (int j = 0; j < item_quantity; j++)
+            for (int i = 0; i < UserManager.Instance.items.Count; i++)
             {
-                AddItem(itemObj.itemBase);
+                var item = UserManager.Instance.items[i];
+                var item_id = item.item_id;
+                var item_quantity = item.quantity;
+                var itemObj = itemTable.itemList.Find(obj => obj.id == item_id);
+
+                for (int j = 0; j < item_quantity; j++)
+                {
+                    InventoryItemBase inventoryItem = itemObj.itemBase as InventoryItemBase;
+                    AddItem(inventoryItem);
+                }
             }
         }
+
     }
 
     private InventorySlot FindStackableSlot(InventoryItemBase item)

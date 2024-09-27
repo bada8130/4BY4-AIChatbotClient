@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
         mFoodBar.SetValue(Food);
 
         InvokeRepeating("IncreaseHunger", 0, HungerRate);
+
+        Debug.Log("what");
     }
 
 
@@ -82,12 +84,24 @@ public class PlayerController : MonoBehaviour
     {
         InventoryItemBase item = e.Item;
 
-        GameObject goItem = (item as MonoBehaviour).gameObject;
-        goItem.SetActive(true);
-        goItem.transform.parent = null;
+        try
+        {
+            GameObject goItem = (item as MonoBehaviour).gameObject;
+            if (goItem != null)
+            {
+                goItem.SetActive(true);
+                goItem.transform.parent = null;
+            }
 
-        if (item == mCurrentItem)
-            mCurrentItem = null;
+            if (item == mCurrentItem)
+                mCurrentItem = null;
+        }
+        catch
+        {
+
+        }
+
+
 
     }
 

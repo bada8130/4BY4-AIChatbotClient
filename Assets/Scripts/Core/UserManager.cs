@@ -11,7 +11,7 @@ public class UserManager : SingletonMono<UserManager>
     public int MyAccountID { get; private set; }
 
 
-    public List<Item> items { get; private set; }
+    public List<Item> items { get; private set; } = new List<Item>();
 
     [SerializeField]
     public EventSO_Void ItemListRefresh;
