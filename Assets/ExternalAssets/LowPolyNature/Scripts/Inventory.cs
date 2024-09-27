@@ -38,7 +38,9 @@ public class Inventory : MonoBehaviour
 
                 for (int j = 0; j < item_quantity; j++)
                 {
-                    InventoryItemBase inventoryItem = itemObj.itemBase as InventoryItemBase;
+                    GameObject itemGO = GameObject.Instantiate(itemObj.itemObject);
+                    itemGO.SetActive(false);
+                    InventoryItemBase inventoryItem = itemGO.GetComponent<InventoryItemBase>();
                     AddItem(inventoryItem);
                 }
             }
@@ -91,6 +93,11 @@ public class Inventory : MonoBehaviour
         {
             ItemUsed(this, new InventoryEventArgs(item));
         }
+
+        UserManager.Instance.ReqUseItem(item.itemID, 1, () =>
+        {
+
+        });
 
         item.OnUse();
     }

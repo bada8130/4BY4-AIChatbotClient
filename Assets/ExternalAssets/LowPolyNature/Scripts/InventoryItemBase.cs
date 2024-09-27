@@ -12,6 +12,7 @@ public enum EItemType
 
 public class InteractableItemBase : MonoBehaviour
 {
+    public int itemID;
     public string Name;
 
     public Sprite Image;
@@ -31,7 +32,7 @@ public class InteractableItemBase : MonoBehaviour
 
     public virtual bool CanInteract(Collider other)
     {
-        return true;   
+        return true;
     }
 }
 
@@ -64,7 +65,7 @@ public class InventoryItemBase : InteractableItemBase
     {
         Destroy(gameObject.GetComponent<Rigidbody>());
         gameObject.SetActive(false);
-        
+
     }
 
     public Vector3 PickPosition;
