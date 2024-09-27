@@ -47,7 +47,6 @@ public class NetworkManager : SingletonMono<NetworkManager>
             username = username,
             password = password
         };
-
         // 외부에서 사용할 때는 StartCoroutine을 내부적으로 호출
         StartCoroutine(PostRequest("login", loginData, callback));
     }
@@ -65,6 +64,33 @@ public class NetworkManager : SingletonMono<NetworkManager>
         // 외부에서 사용할 때는 StartCoroutine을 내부적으로 호출
         StartCoroutine(PostRequest("give_item", itemData, callback));
     }
+
+    public void GetItemAll(int userId, System.Action<bool, string> callback)
+    {
+        GetItemAll sendData = new GetItemAll
+        {
+            user_id = userId,
+        };
+        // 외부에서 사용할 때는 StartCoroutine을 내부적으로 호출
+        StartCoroutine(PostRequest("get_all_items", sendData, callback));
+    }
+
+    public void UseItem(int _userId, int _itemId, int _quantity, System.Action<bool, string> callback)
+    {
+        UseItem sendData = new UseItem
+        {
+            user_id = _userId,
+            item_id = _itemId,
+            quantity = _quantity,
+        };
+        // 외부에서 사용할 때는 StartCoroutine을 내부적으로 호출
+        StartCoroutine(PostRequest("use_item", sendData, callback));
+    }
+
+
+
+
+
 }
 
 // 로그인 데이터 구조체
@@ -78,6 +104,23 @@ public class LoginData
 // 아이템 지급 데이터 구조체
 [System.Serializable]
 public class GiveItemData
+{
+    public int user_id;
+    public int item_id;
+    public int quantity;
+}
+
+// 로그인 데이터 구조체
+[System.Serializable]
+public class GetItemAll
+{
+    public int user_id;
+}
+
+
+// 아이템 지급 데이터 구조체
+[System.Serializable]
+public class UseItem
 {
     public int user_id;
     public int item_id;

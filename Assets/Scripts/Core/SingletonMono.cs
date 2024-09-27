@@ -37,6 +37,11 @@ public class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     protected virtual void OnDestroy()
     {
         _isShuttingDown = true;

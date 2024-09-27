@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
 {
     private const int SLOTS = 9;
 
+    public ItemTable itemTable;
+
     private IList<InventorySlot> mSlots = new List<InventorySlot>();
 
     public event EventHandler<InventoryEventArgs> ItemAdded;
@@ -18,6 +20,24 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < SLOTS; i++)
         {
             mSlots.Add(new InventorySlot(i));
+        }
+
+
+    }
+
+    public void RefreshItemList()
+    {
+        for (int i = 0; i < UserManager.Instance.items.Count; i++)
+        {
+            var item = UserManager.Instance.items[i];
+            var item_id = item.item_id;
+            var item_quantity = item.quantity;
+            var itemObj = itemTable.itemList.Find(obj => obj.id == item_id);
+
+            for (int j = 0; j < item_quantity; j++)
+            {
+                AddItem(itemObj.itemBase);
+            }
         }
     }
 

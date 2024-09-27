@@ -12,9 +12,9 @@ public class LoginUI : MonoBehaviour
         string username = usernameField.text;
         string password = passwordField.text;
 
-        NetworkManager.Instance.Login(username, password, (isSuccess, result) =>
+        UserManager.Instance.ReqLogin(username, password, (error) =>
         {
-            errorText.text = result;
+            errorText.text = error;
         });
     }
 }
